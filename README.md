@@ -25,13 +25,13 @@
 
 Приложение реализует чистую архитектуру с разделением на слои:
 
-adapter/         — адаптеры JPA и JDBC
-config/          — конфигурация seed-инициализации и свойств
-controller/      — REST-контроллеры
-model/           — доменные сущности
-port/            — интерфейсы портов (ProductPort)
-repo/            — JPA-репозиторий
-service/         — сервисный слой
+	adapter/         — адаптеры JPA и JDBC
+	config/          — конфигурация seed-инициализации и свойств
+	controller/      — REST-контроллеры
+	model/           — доменные сущности
+	port/            — интерфейсы портов (ProductPort)
+	repo/            — JPA-репозиторий
+	service/         — сервисный слой
 
 Архитектурный паттерн: Hexagonal Architecture (Ports and Adapters)
 БД: PostgreSQL или MySQL (в зависимости от конфигурации)
