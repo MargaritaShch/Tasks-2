@@ -1,0 +1,16 @@
+global:
+  scrape_interval: 5s
+  scrape_timeout: 4s
+  evaluation_interval: 5s
+
+scrape_configs:
+  # Spring Boot (работает на твоём хосте)
+  - job_name: "spring-app"
+    metrics_path: /actuator/prometheus
+    static_configs:
+      - targets: ["host.docker.internal:8080"]
+
+  # Postgres exporter (внутри compose-сети)
+  - job_name: "postgres"
+    static_configs:
+      - targets: ["postgres-exporter:9187"]

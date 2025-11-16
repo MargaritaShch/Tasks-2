@@ -1,6 +1,7 @@
 spring:
   application:
     name: product-mock
+
 server:
   port: 8080
 
@@ -9,17 +10,31 @@ spring:
   config:
     activate:
       on-profile: local
+
+  # SQL-инициализация схемы
+  sql:
+    init:
+      mode: always           # выполняем скрипты при старте
+      platform: postgresql   # ищет schema-postgresql.sql
+
   datasource:
-    url: jdbc:postgresql://localhost:5432/productdb
+    url: jdbc:postgresql://localhost:5433/productdb   # ← проверь, что это та БД
     username: product
     password: productpass
+
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none         # для JDBC режимов — схема из SQL
     open-in-view: false
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,info,prometheus
+app:
+  db:
+    lib: jdbc                # jdbc | jpa
+  simulate:
+    delay: false
+  seed:
+    impl: jdbc              # сидим через JDBC
+    enabled: true
+    reset: true              # 1 запуск с true (сбросить и получить id 1..200), дальше false
+    target: 200
+    batch-size: 200
